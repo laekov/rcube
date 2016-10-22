@@ -24,3 +24,6 @@ bool CornerCube::operator ==(const CornerCube& x) const {
 	}
 	return 1;
 }
+bool CornerCube::operator !=(const CornerCube& x) const {
+	return !(*this == x);
+}

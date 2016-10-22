@@ -67,8 +67,8 @@ class RubikCube {
 		RubikCube hRotBR(int = 0);
 
 		/* operation shell */
-		RubikCube rot(const char);
-		RubikCube rot(std::string);
+		RubikCube rot(const char, int = 0);
+		RubikCube rot(std::string, int = 0);
 		RubikCube shuffle();
 
 		/* debugs */

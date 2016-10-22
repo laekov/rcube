@@ -49,7 +49,7 @@ StepRecorder* RubikCube::getRecorder() const {
 void RubikCube::addRecord(char x) {
 	if (this->rec) {
 		this->rec->push(x);
-	}
+	} 
 }
 int RubikCube::get(int x) const {
 	return (x >= 0 && x < 54) ? a[x] : -1;
@@ -274,8 +274,12 @@ void inColor(FILE* fileO, int x = -1) {
 	}
 }
 void RubikCube::print(FILE* fileO) {
+	for (int i = 0; i < 32; ++ i) {
+		fputc('=', fileO);
+	}
+	fputc(10, fileO);
 	for (int i = 0; i < 3; ++ i) {
-		for (int j = 0; j < 3; ++ j) {
+		for (int j = 0; j < 4; ++ j) {
 			fputc(32, fileO);
 		}
 		for (int j = 0; j < 3; ++ j) {
@@ -283,16 +287,19 @@ void RubikCube::print(FILE* fileO) {
 		}
 		fputc(10, fileO);
 	}
+	fputc(10, fileO);
 	for (int i = 0; i < 3; ++ i) {
 		for (int j = 0; j < 4; ++ j) {
 			for (int k = 0; k < 3; ++ k) {
 				inColor(fileO, this->a[(j + 1) * 9 + i * 3 + k]);
 			}
+			fputc(32, fileO);
 		}
 		fputc(10, fileO);
 	}
+	fputc(10, fileO);
 	for (int i = 0; i < 3; ++ i) {
-		for (int j = 0; j < 3; ++ j) {
+		for (int j = 0; j < 4; ++ j) {
 			fputc(32, fileO);
 		}
 		for (int j = 0; j < 3; ++ j) {
@@ -301,46 +308,50 @@ void RubikCube::print(FILE* fileO) {
 		fputc(10, fileO);
 	}
 	inColor(fileO, -31);
+	for (int i = 0; i < 32; ++ i) {
+		fputc('-', fileO);
+	}
+	fputc(10, fileO);
 }
 
-RubikCube RubikCube::rot(const char cmdc) {
+RubikCube RubikCube::rot(const char cmdc, int noPrint) {
 	switch (cmdc) {
 		case 'q':
-			return this->vRotLU(1);
+			return this->vRotLU(!noPrint);
 		case 'a':
-			return this->vRotLD(1);
+			return this->vRotLD(!noPrint);
 		case 'r':
-			return this->vRotRU(1);
+			return this->vRotRU(!noPrint);
 		case 'f':
-			return this->vRotRD(1);
+			return this->vRotRD(!noPrint);
 		case '2':
-			return this->hRotTL(1);
+			return this->hRotTL(!noPrint);
 		case '4':
-			return this->hRotTR(1);
+			return this->hRotTR(!noPrint);
 		case 'z':
-			return this->hRotBL(1);
+			return this->hRotBL(!noPrint);
 		case 'c':
-			return this->hRotBR(1);
+			return this->hRotBR(!noPrint);
 		case 'i':
-			return this->turnUp(1);
+			return this->turnUp(!noPrint);
 		case 'k':
-			return this->turnDown(1);
+			return this->turnDown(!noPrint);
 		case 'u':
-			return this->turnLeft(1);
+			return this->turnLeft(!noPrint);
 		case 'o':
-			return this->turnRight(1);
+			return this->turnRight(!noPrint);
 		case 'j':
-			return this->turnAntiClock(1);
+			return this->turnAntiClock(!noPrint);
 		case 'l':
-			return this->turnClock(1);
+			return this->turnClock(!noPrint);
 		default:
 			return *this;
 	}
 }
-RubikCube RubikCube::rot(std::string a) {
+RubikCube RubikCube::rot(std::string a, int noPrint) {
 	RubikCube res(*this);
 	for (int i = 0, len = a.length(); i < len; ++ i) {
-		res.rot(a[i]);
+		res = res.rot(a[i], noPrint);
 	}
 	return res;
 }
@@ -348,10 +359,11 @@ RubikCube RubikCube::rot(std::string a) {
 RubikCube RubikCube::shuffle() {
 	const char opList[15] = "24qarfzcjl";
 	const int step = 128;
+	//srand(2);
 	srand(time(0));
 	RubikCube res(*this);
 	for (int i = 0; i < step; ++ i) {
-		res = res.rot(opList[rand() % 10]);
+		res = res.rot(opList[rand() % 10], 1);
 	}
 	return res;
 }

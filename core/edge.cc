@@ -23,4 +23,6 @@ bool EdgeCube::operator ==(const EdgeCube& x) const {
 	}
 	return 1;
 }
-
+bool EdgeCube::operator !=(const EdgeCube& x) const {
+	return !(*this == x);
+}

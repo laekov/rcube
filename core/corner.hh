@@ -11,5 +11,6 @@ class CornerCube {
 		CornerCube();
 		CornerCube(int, int, int);
 		bool operator ==(const CornerCube&) const;
+		bool operator !=(const CornerCube&) const;
 };
 #endif

@@ -7,10 +7,11 @@
 #define EDGE_HH
 class EdgeCube {
 	public:
-		int a[3];
+		int a[2];
 		EdgeCube();
 		EdgeCube(int, int);
 		bool operator ==(const EdgeCube&) const;
+		bool operator !=(const EdgeCube&) const;
 };
 #endif
 
