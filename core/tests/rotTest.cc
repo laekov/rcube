@@ -1,7 +1,7 @@
 #include <cstdio>
 
-#include "recorder.hh"
-#include "cube.hh"
+#include "../recorder.hh"
+#include "../cube.hh"
 
 int main() {
 	RubikCube* c(new RubikCube);
