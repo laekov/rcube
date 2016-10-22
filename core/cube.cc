@@ -5,6 +5,9 @@
  */
 #include <cstdio>
 #include <cstring>
+#include <ctime>
+#include <cstdlib>
+#include <string>
 
 #include "cube.hh"
 
@@ -50,7 +53,11 @@ void RubikCube::addRecord(char x) {
 }
 int RubikCube::get(int x) const {
 	return (x >= 0 && x < 54) ? a[x] : -1;
-} void RubikCube::set(int x, int v) { if (x >= 0 && x < 54 && v >= 0 && v < 6) {
+} 
+int RubikCube::operator [](int x) const {
+	return this->get(x);
+}
+void RubikCube::set(int x, int v) { if (x >= 0 && x < 54 && v >= 0 && v < 6) {
 		a[x] = v;
 	}
 }
@@ -294,5 +301,74 @@ void RubikCube::print(FILE* fileO) {
 		fputc(10, fileO);
 	}
 	inColor(fileO, -31);
+}
+
+RubikCube RubikCube::rot(const char cmdc) {
+	switch (cmdc) {
+		case 'q':
+			return this->vRotLU(1);
+		case 'a':
+			return this->vRotLD(1);
+		case 'r':
+			return this->vRotRU(1);
+		case 'f':
+			return this->vRotRD(1);
+		case '2':
+			return this->hRotTL(1);
+		case '4':
+			return this->hRotTR(1);
+		case 'z':
+			return this->hRotBL(1);
+		case 'c':
+			return this->hRotBR(1);
+		case 'i':
+			return this->turnUp(1);
+		case 'k':
+			return this->turnDown(1);
+		case 'u':
+			return this->turnLeft(1);
+		case 'o':
+			return this->turnRight(1);
+		case 'j':
+			return this->turnAntiClock(1);
+		case 'l':
+			return this->turnClock(1);
+		default:
+			return *this;
+	}
+}
+RubikCube RubikCube::rot(std::string a) {
+	RubikCube res(*this);
+	for (int i = 0, len = a.length(); i < len; ++ i) {
+		res.rot(a[i]);
+	}
+	return res;
+}
+
+RubikCube RubikCube::shuffle() {
+	const char opList[15] = "24qarfzcjl";
+	const int step = 128;
+	srand(time(0));
+	RubikCube res(*this);
+	for (int i = 0; i < step; ++ i) {
+		res = res.rot(opList[rand() % 10]);
+	}
+	return res;
+}
+
+CornerCube RubikCube::corner(int x) const {
+	const int map[8][3] = {
+		{6, 11, 18}, {8, 20, 27}, {2, 29, 36}, {0, 9, 38},
+		{17, 24, 45}, {26, 33, 47}, {35, 42, 53}, {15, 44, 51}
+	};
+	return CornerCube(a[map[x][0]], a[map[x][1]], a[map[x][2]]);
+}
+EdgeCube RubikCube::edge(int x) const {
+	const int map[12][2] = {
+		{7, 19}, {5, 28}, {1, 37}, {3, 10},
+		{14, 21}, {23, 30}, {32, 39}, {41, 12},
+		{25, 46}, {34, 50}, {43, 52}, {16, 48}
+	};
+	return EdgeCube(a[map[x][0]], a[map[x][1]]);
 }
 

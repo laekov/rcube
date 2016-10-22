@@ -7,12 +7,15 @@
 #define CUBE_HH
 
 #include <cstdio>
+#include <string>
 
 #ifndef _l
 #	define _l (long long int)
 #endif
 
 #include "recorder.hh"
+#include "corner.hh"
+#include "edge.hh"
 
 class RubikCube {
 	private: 
@@ -32,6 +35,7 @@ class RubikCube {
 		StepRecorder* getRecorder() const;
 		void addRecord(char x);
 		int get(int) const;
+		int operator [](int) const;
 		void set(int, int);
 
 		/* hash */
@@ -62,8 +66,17 @@ class RubikCube {
 		RubikCube hRotBL(int = 0);
 		RubikCube hRotBR(int = 0);
 
+		/* operation shell */
+		RubikCube rot(const char);
+		RubikCube rot(std::string);
+		RubikCube shuffle();
+
 		/* debugs */
 		void print(FILE*);
+
+		/* generate corner and edge classes */
+		CornerCube corner(int) const;
+		EdgeCube edge(int) const;
 };
 #endif
 

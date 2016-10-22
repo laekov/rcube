@@ -1,6 +1,4 @@
 *.dSYM
 *.o
 *.exe
-
-
-
+*.swp

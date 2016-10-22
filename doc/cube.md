@@ -15,6 +15,11 @@ Every two directions of each 3 directions are provided.
 #Rotations
 As the hint defines in `cube.hh`
 
+#Edges and corners
+All numbered from 0, from top to button in counter-clockwise.
+
+Start from the left front cube, or the front cube.
+
 #Colors
 Integer from `0` to `5`.
 
@@ -25,3 +30,4 @@ By default, they refers to colors as follow.
 * 3: Orange
 * 4: White
 * 5: Green
+
