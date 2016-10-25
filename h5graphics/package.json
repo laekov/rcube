@@ -1,0 +1,19 @@
+{
+  "name": "rcubeGraphics",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/laekov/rcube"
+  },
+  "author": "laekov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/laekov/rcube/issues"
+  },
+  "dependencies": {
+    "grunt": "~1.0.1"
+  }
+}

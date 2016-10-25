@@ -2,3 +2,5 @@
 *.o
 *.exe
 *.swp
+h5graphics/node_modules
+h5graphics/bower_components
