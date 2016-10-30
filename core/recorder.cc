@@ -15,6 +15,8 @@ StepRecorder::StepRecorder(char* fileName) {
 }
 
 void StepRecorder::push(char x) {
-	fprintf(stderr, "%c", x);
+	if (this->outf) {
+		fprintf(this->outf, "%c", x);
+	}
 }
 

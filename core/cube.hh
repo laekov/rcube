@@ -22,25 +22,6 @@ class RubikCube {
 		int a[54];
 		StepRecorder* rec;
 
-	public:
-		/* constructors */
-		RubikCube();
-		RubikCube(int x);
-		RubikCube(const RubikCube&);
-		RubikCube operator =(const RubikCube&);
-
-		/* basic */
-		void init();
-		void setRecorder(StepRecorder* x);
-		StepRecorder* getRecorder() const;
-		void addRecord(char x);
-		int get(int) const;
-		int operator [](int) const;
-		void set(int, int);
-
-		/* hash */
-		int hash() const;
-
 		/* turns
 		 * change view sides */
 		RubikCube turnUp(int = 0);
@@ -65,6 +46,25 @@ class RubikCube {
 		RubikCube hRotTR(int = 0);
 		RubikCube hRotBL(int = 0);
 		RubikCube hRotBR(int = 0);
+
+	public:
+		/* constructors */
+		RubikCube();
+		RubikCube(int x);
+		RubikCube(const RubikCube&);
+		RubikCube operator =(const RubikCube&);
+
+		/* basic */
+		void init();
+		void setRecorder(StepRecorder* x);
+		StepRecorder* getRecorder() const;
+		void addRecord(char x);
+		int get(int) const;
+		int operator [](int) const;
+		void set(int, int);
+
+		/* hash */
+		int hash() const;
 
 		/* operation shell */
 		RubikCube rot(const char, int = 0);

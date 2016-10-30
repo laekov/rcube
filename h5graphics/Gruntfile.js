@@ -1,4 +1,6 @@
-vueFiles = ['bower_components/vue/dist/vue.min.js'];
+var vueFiles = ['bower_components/vue/dist/vue.min.js'];
+var threejsFiles = ['bower_components/three.js/build/three.min.js'];
+var jqueryFiles = ['bower_components/jquery/dist/jquery.min.js'];
 
 module.exports = function(grunt) {
 	grunt.initConfig({
@@ -6,7 +8,9 @@ module.exports = function(grunt) {
 		uglify: {
 			vue: {
 				files: {
-					'dists/vue.js': vueFiles
+					'dists/vue.js': vueFiles,
+					'dists/threejs.js': threejsFiles,
+					'dists/jquery.js': jqueryFiles,
 				}
 			}
 		}
