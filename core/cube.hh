@@ -62,6 +62,7 @@ class RubikCube {
 		int get(int) const;
 		int operator [](int) const;
 		void set(int, int);
+		void read(FILE*);
 
 		/* hash */
 		int hash() const;

@@ -5,11 +5,12 @@
 #include "../ai/ai.hh"
 
 int main() {
+	freopen("a.in", "r", stdin);
 	RubikCube c;
-	StepRecorder r("steps.out");
+	// StepRecorder r("steps.out");
 	c.init();
-	c.setRecorder(&r);
-	c = c.shuffle();
+	c.read(stdin);
+	// c.setRecorder(&r);
 	c.print(stdout);
 	c = aiRecover(c);
 	c.print(stdout);

@@ -384,3 +384,53 @@ EdgeCube RubikCube::edge(int x) const {
 	return EdgeCube(a[map[x][0]], a[map[x][1]]);
 }
 
+int char2num(char x) {
+	switch (x) {
+		case 'R':
+		   	return 0;
+		case 'G':
+			return 1;
+		case 'B':
+			return 2;
+		case 'O':
+			return 3;
+		case 'Y':
+			return 4;
+		case 'W':
+			return 5;
+	}
+}
+char num2char(int x) {
+	static const char map[] = "RGBOYW";
+	return map[x];
+}
+
+char* nextChar(char* p) {
+	for (++ p; *p && !isupper(*p); ++ p);
+	return p;
+}
+
+void RubikCube::read(FILE* fin) {
+	char buf[233], *bp;
+	fread(buf, sizeof(char), sizeof(buf), fin);
+	bp = buf;
+	for (int i = 18; i < 27; ++ i, bp = nextChar(bp)) {
+		this->a[i] = char2num(*bp);
+	}
+	for (int i = 36; i < 45; ++ i, bp = nextChar(bp)) {
+		this->a[i] = char2num(*bp);
+	}
+	for (int i = 27; i < 36; ++ i, bp = nextChar(bp)) {
+		this->a[i] = char2num(*bp);
+	}
+	for (int i = 9; i < 18; ++ i, bp = nextChar(bp)) {
+		this->a[i] = char2num(*bp);
+	}
+	for (int i = 0; i < 9; ++ i, bp = nextChar(bp)) {
+		this->a[i] = char2num(*bp);
+	}
+	for (int i = 45; i < 54; ++ i, bp = nextChar(bp)) {
+		this->a[i] = char2num(*bp);
+	}
+}
+
