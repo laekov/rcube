@@ -6,11 +6,9 @@
 
 int main() {
 	RubikCube c;
-	StepRecorder r("steps.out");
+	StepRecorder r("cube.out");
 	c.init();
+	c.read(fopen("cube.in", "r"));
 	c.setRecorder(&r);
-	c = c.shuffle();
-	c.print(stdout);
 	c = aiRecover(c);
-	c.print(stdout);
 }

@@ -63,6 +63,7 @@ class RubikCube {
 		int operator [](int) const;
 		void set(int, int);
 		void read(FILE*);
+		void print(FILE*);
 
 		/* hash */
 		int hash() const;
@@ -70,10 +71,10 @@ class RubikCube {
 		/* operation shell */
 		RubikCube rot(const char, int = 0);
 		RubikCube rot(std::string, int = 0);
-		RubikCube shuffle();
+		RubikCube shuffle(int = 0);
 
 		/* debugs */
-		void print(FILE*);
+		void printc(FILE*);
 
 		/* generate corner and edge classes */
 		CornerCube corner(int) const;

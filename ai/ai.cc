@@ -300,7 +300,8 @@ RubikCube topEdge(RubikCube a) {
 
 RubikCube aiRecover(RubikCube a) {
 	a = bottomCross(a);
-	a = bottomCorner(a).rot("jj");
+	a = bottomCorner(a);
+	a = a.rot("jj");
 	a = middleEdge(a);
 	a = topCross(a);
 	a = topPos(a);
