@@ -2,3 +2,8 @@
 *.o
 *.exe
 *.swp
+h5graphics/node_modules
+h5graphics/bower_components
+.DS_Store
+h5graphics/dists
+bin

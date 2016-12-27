@@ -13,9 +13,11 @@ class StepRecorder {
 		FILE* outf;
 
 	public:
+		int faces[6], flag;
 		StepRecorder();
-		StepRecorder(char*);
-		void push(char);
+		~StepRecorder();
+		StepRecorder(const char*);
+		void push(const char);
 };
 #endif
 

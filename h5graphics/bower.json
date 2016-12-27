@@ -1,0 +1,23 @@
+{
+  "name": "rcube",
+  "version": "0.0.1",
+  "homepage": "https://github.com/laekov/rcube",
+  "authors": [
+    "laekov"
+  ],
+  "description": "Rubik'sCubeGraphics",
+  "main": "client/index.html",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "vue": "^2.0.3",
+    "three.js": "threejs#*",
+    "jquery": "^3.1.1"
+  }
+}

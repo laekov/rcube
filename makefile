@@ -1,29 +1,35 @@
 cc=g++ -g
-allo=recorder.o edge.o corner.o cube.o ai.o
+allo=bin/recorder.o bin/edge.o bin/corner.o bin/cube.o bin/ai.o
 
-all : recorder.o edge.o corner.o cube.o ai.o
+all : $(allo)
 	echo done
 
-ai : all tests/recover.cc
-	$(cc) $(allo) tests/recover.cc -o ai.exe
+recover : all tests/recover.cc 
+	$(cc) $(allo) tests/recover.cc -o bin/recover.exe
 
-rot : all tests/rot.cc
-	$(cc) $(allo) tests/rot.cc -o rot.exe
+shuffle : all tests/shuffle.cc
+	$(cc) $(allo) tests/shuffle.cc -o bin/shuffle.exe
 
-ai.o : cube.o corner.o edge.o recorder.o ai/ai.hh ai/ai.cc
-	$(cc) ai/ai.cc -c
+rot : all tests/rot.cc 
+	$(cc) $(allo) tests/rot.cc -o bin/rot.exe 
 
-cube.o : core/recorder.hh core/cube.hh core/corner.hh core/edge.hh core/cube.cc
-	$(cc) core/cube.cc -c
+bin/ai.o : bin/cube.o bin/corner.o bin/edge.o bin/recorder.o ai/ai.hh ai/ai.cc 
+	$(cc) ai/ai.cc -c -o bin/ai.o
 
-corner.o : core/corner.hh core/corner.cc
-	$(cc) core/corner.cc -c
+bin/cube.o : core/recorder.hh core/cube.hh core/corner.hh core/edge.hh core/cube.cc 
+	$(cc) core/cube.cc -c -o bin/cube.o
 
-edge.o : core/edge.hh core/edge.cc
-	$(cc) core/edge.cc -c
+bin/corner.o : core/corner.hh core/corner.cc 
+	$(cc) core/corner.cc -c -o bin/corner.o
 
-recorder.o : core/recorder.hh core/recorder.cc
-	$(cc) core/recorder.cc -c
+bin/edge.o : core/edge.hh core/edge.cc 
+	$(cc) core/edge.cc -c -o bin/edge.o
+
+bin/recorder.o : core/recorder.hh core/recorder.cc 
+	$(cc) core/recorder.cc -c -o bin/recorder.o
+
+bin/logger.o : core/recorder.hh core/logger.cc 
+	$(cc) core/logger.cc -c -o bin/logger.o
 
 clean :
-	rm -rf *.exe *.o *.dSYM
+	rm -rf bin/*.exe bin/*.o bin/*.dSYM

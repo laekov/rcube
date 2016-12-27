@@ -125,7 +125,7 @@ int mapHRotTL(int x) {
 
 RubikCube RubikCube::turnUp(int needRecord) {
 	if (needRecord) {
-		this->addRecord('u');
+		this->addRecord('i');
 	}
 	RubikCube res(*this);
 	for (int i = 0; i < 54; ++ i) {
@@ -135,7 +135,7 @@ RubikCube RubikCube::turnUp(int needRecord) {
 }
 RubikCube RubikCube::turnDown(int needRecord) {
 	if (needRecord) {
-		this->addRecord('d');
+		this->addRecord('k');
 	}
 	RubikCube res(*this);
 	for (int i = 0; i < 54; ++ i) {
@@ -145,7 +145,7 @@ RubikCube RubikCube::turnDown(int needRecord) {
 }
 RubikCube RubikCube::turnLeft(int needRecord) {
 	if (needRecord) {
-		this->addRecord('l');
+		this->addRecord('u');
 	}
 	RubikCube res(*this);
 	for (int i = 0; i < 54; ++ i) {
@@ -155,7 +155,7 @@ RubikCube RubikCube::turnLeft(int needRecord) {
 }
 RubikCube RubikCube::turnRight(int needRecord) {
 	if (needRecord) {
-		this->addRecord('r');
+		this->addRecord('o');
 	}
 	RubikCube res(*this);
 	for (int i = 0; i < 54; ++ i) {
@@ -165,7 +165,7 @@ RubikCube RubikCube::turnRight(int needRecord) {
 }
 RubikCube RubikCube::turnClock(int needRecord) {
 	if (needRecord) {
-		this->addRecord('c');
+		this->addRecord('l');
 	}
 	RubikCube res(*this);
 	for (int i = 0; i < 54; ++ i) {
@@ -175,7 +175,7 @@ RubikCube RubikCube::turnClock(int needRecord) {
 }
 RubikCube RubikCube::turnAntiClock(int needRecord) {
 	if (needRecord) {
-		this->addRecord('a');
+		this->addRecord('j');
 	}
 	RubikCube res(*this);
 	for (int i = 0; i < 54; ++ i) {
@@ -186,7 +186,7 @@ RubikCube RubikCube::turnAntiClock(int needRecord) {
 
 RubikCube RubikCube::vRotRU(int needRecord) {
 	if (needRecord) {
-		this->addRecord('R');
+		this->addRecord('r');
 	}
 	RubikCube res(*this);
 	res = res.turnAntiClock();
@@ -196,7 +196,7 @@ RubikCube RubikCube::vRotRU(int needRecord) {
 }
 RubikCube RubikCube::vRotRD(int needRecord) {
 	if (needRecord) {
-		this->addRecord('F');
+		this->addRecord('f');
 	}
 	RubikCube res(*this);
 	res = res.turnAntiClock();
@@ -206,7 +206,7 @@ RubikCube RubikCube::vRotRD(int needRecord) {
 }
 RubikCube RubikCube::vRotLU(int needRecord) {
 	if (needRecord) {
-		this->addRecord('Q');
+		this->addRecord('q');
 	}
 	RubikCube res(*this);
 	res = res.turnClock();
@@ -216,7 +216,7 @@ RubikCube RubikCube::vRotLU(int needRecord) {
 }
 RubikCube RubikCube::vRotLD(int needRecord) {
 	if (needRecord) {
-		this->addRecord('A');
+		this->addRecord('a');
 	}
 	RubikCube res(*this);
 	res = res.turnClock();
@@ -247,7 +247,7 @@ RubikCube RubikCube::hRotTR(int needRecord) {
 }
 RubikCube RubikCube::hRotBL(int needRecord) {
 	if (needRecord) {
-		this->addRecord('Z');
+		this->addRecord('z');
 	}
 	RubikCube res(*this);
 	res = res.turnClock().turnClock();
@@ -257,7 +257,7 @@ RubikCube RubikCube::hRotBL(int needRecord) {
 }
 RubikCube RubikCube::hRotBR(int needRecord) {
 	if (needRecord) {
-		this->addRecord('C');
+		this->addRecord('c');
 	}
 	RubikCube res(*this);
 	res = res.turnClock().turnClock();
@@ -273,7 +273,7 @@ void inColor(FILE* fileO, int x = -1) {
 		fprintf(fileO, "\33[%dm", x + 31);
 	}
 }
-void RubikCube::print(FILE* fileO) {
+void RubikCube::printc(FILE* fileO) {
 	for (int i = 0; i < 32; ++ i) {
 		fputc('=', fileO);
 	}
@@ -315,35 +315,37 @@ void RubikCube::print(FILE* fileO) {
 }
 
 RubikCube RubikCube::rot(const char cmdc, int noPrint) {
+	const char nop[] = "uiojkl";
+	int printFlag(!noPrint);
 	switch (cmdc) {
 		case 'q':
-			return this->vRotLU(!noPrint);
+			return this->vRotLU(printFlag);
 		case 'a':
-			return this->vRotLD(!noPrint);
+			return this->vRotLD(printFlag);
 		case 'r':
-			return this->vRotRU(!noPrint);
+			return this->vRotRU(printFlag);
 		case 'f':
-			return this->vRotRD(!noPrint);
+			return this->vRotRD(printFlag);
 		case '2':
-			return this->hRotTL(!noPrint);
+			return this->hRotTL(printFlag);
 		case '4':
-			return this->hRotTR(!noPrint);
+			return this->hRotTR(printFlag);
 		case 'z':
-			return this->hRotBL(!noPrint);
+			return this->hRotBL(printFlag);
 		case 'c':
-			return this->hRotBR(!noPrint);
+			return this->hRotBR(printFlag);
 		case 'i':
-			return this->turnUp(!noPrint);
+			return this->turnUp(printFlag);
 		case 'k':
-			return this->turnDown(!noPrint);
+			return this->turnDown(printFlag);
 		case 'u':
-			return this->turnLeft(!noPrint);
+			return this->turnLeft(printFlag);
 		case 'o':
-			return this->turnRight(!noPrint);
+			return this->turnRight(printFlag);
 		case 'j':
-			return this->turnAntiClock(!noPrint);
+			return this->turnAntiClock(printFlag);
 		case 'l':
-			return this->turnClock(!noPrint);
+			return this->turnClock(printFlag);
 		default:
 			return *this;
 	}
@@ -356,9 +358,8 @@ RubikCube RubikCube::rot(std::string a, int noPrint) {
 	return res;
 }
 
-RubikCube RubikCube::shuffle() {
+RubikCube RubikCube::shuffle(int step) {
 	const char opList[15] = "24qarfzcjl";
-	const int step = 128;
 	//srand(2);
 	srand(time(0));
 	RubikCube res(*this);
@@ -382,5 +383,52 @@ EdgeCube RubikCube::edge(int x) const {
 		{25, 46}, {34, 50}, {43, 52}, {16, 48}
 	};
 	return EdgeCube(a[map[x][0]], a[map[x][1]]);
+}
+
+int char2num(char x) {
+	switch (x) {
+		case 'R':
+		   	return 0;
+		case 'G':
+			return 1;
+		case 'B':
+			return 2;
+		case 'O':
+			return 3;
+		case 'W':
+			return 4;
+		case 'Y':
+			return 5;
+	}
+}
+char num2char(int x) {
+	static const char map[] = "RGBOWY";
+	return map[x];
+}
+
+char* nextChar(char* p) {
+	for (; *p && !isupper(*p); ++ p);
+	return p;
+}
+
+void RubikCube::read(FILE* fin) {
+	static const int startPos[] = { 18, 36, 27, 9, 0, 45 };
+	char buf[233], *bp;
+	fread(buf, sizeof(char), sizeof(buf), fin);
+	bp = nextChar(buf);
+	for (int gi = 0; gi < 6; ++ gi) {
+		for (int i = 0; i < 9; ++ i, bp = nextChar(bp + 1)) {
+			this->a[startPos[gi] + i] = char2num(*bp);
+		}
+	}
+} 
+
+void RubikCube::print(FILE* fou) {
+	for (int i = 0; i < 54; ++ i) {
+		fprintf(fou, "%c", num2char(this->get(i)));
+		if (i % 9 == 8) {
+			fputc(10, fou);
+		}
+	}
 }
 
