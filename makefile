@@ -10,6 +10,9 @@ recover : all tests/recover.cc
 shuffle : all tests/shuffle.cc
 	$(cc) $(allo) tests/shuffle.cc -o bin/shuffle.exe
 
+checker : tests/checker.cc
+	$(cc) tests/checker.cc -o bin/checker.exe
+
 rot : all tests/rot.cc 
 	$(cc) $(allo) tests/rot.cc -o bin/rot.exe 
 
